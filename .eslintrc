@@ -1,0 +1,18 @@
+{
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended",  "plugin:@typescript-eslint/recommended", "prettier"],
+    "plugins": [
+        "prettier",
+        "react",
+        "react-hooks",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "prettier/prettier": ["warn", { "singleQuote": true, "endOfLine":"auto", "printWidth": 150 }]
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parser": "@typescript-eslint/parser"
+}
