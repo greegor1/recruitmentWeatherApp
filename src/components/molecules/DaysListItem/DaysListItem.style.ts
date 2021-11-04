@@ -1,24 +1,26 @@
+import { ThemeI } from 'assets/styles/theme';
 import { Title } from 'components/atoms/Title/Title';
 import styled from 'styled-components';
 import { Weather } from 'types/Weather.types';
 
-const getBgcImage = (theme: any, weatherDesc: string) => {
+const getBgcImage = (theme: ThemeI, weatherDesc: string) => {
   switch (weatherDesc) {
-    case 'cloudy':
+    case 'Clouds':
       return theme.backgroundImage.cloudy;
-    case 'rainy':
-      return theme.backgroundImage.cloudy;
+    case 'Rain':
+      return theme.backgroundImage.rainy;
     default:
       return theme.backgroundImage.sunny;
   }
 };
 
-const getColor = (theme: any, children: any) => {
-  const temp = +children[0];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getColor = (theme: ThemeI, children: any) => {
+  const temperatureValue = +children[1];
 
-  if (temp > 15) return theme.colors.success;
-  if (temp >= 10) return theme.colors.warning;
-  if (temp < 10) return theme.colors.error;
+  if (temperatureValue > 15) return theme.colors.success;
+  if (temperatureValue >= 10) return theme.colors.warning;
+  if (temperatureValue < 10) return theme.colors.error;
   return theme.colors.darkPurple;
 };
 
@@ -34,7 +36,7 @@ export const Wrapper = styled.li<Pick<Weather, 'weatherDesc'>>`
 `;
 
 export const InfoWrapper = styled.div`
-  padding: 10px 20px;
+  padding: 0 20px 10px;
 `;
 
 export const ValueParagraph = styled.p`
@@ -45,4 +47,5 @@ export const ValueParagraph = styled.p`
 `;
 export const SingleDayTitle = styled(Title)`
   color: ${({ theme }) => theme.colors.darkPurple};
+  margin-bottom: 0px;
 `;

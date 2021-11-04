@@ -1,13 +1,11 @@
 import DaysList from 'components/organisms/DaysList/DaysList';
-import { ViewWrapper } from 'components/organisms/ViewWrapper/ViewWrapper';
+import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 import React from 'react';
 
-const Dashboard = () => {
-  return (
-    <ViewWrapper>
-      <DaysList />
-    </ViewWrapper>
-  );
-};
+const Dashboard = () => (
+  <ViewWrapper>
+    <DaysList />
+  </ViewWrapper>
+);
 
 export default Dashboard;

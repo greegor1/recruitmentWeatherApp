@@ -1,4 +1,31 @@
-export const theme = {
+export interface ThemeI {
+  colors: {
+    white: string;
+    lightGrey: string;
+    grey: string;
+    darkGrey: string;
+    black: string;
+    success: string;
+    error: string;
+    warning: string;
+    darkPurple: string;
+    lightPurple: string;
+  };
+  fontSize: {
+    xxl: string;
+    xl: string;
+    l: string;
+    m: string;
+    s: string;
+  };
+  backgroundImage: {
+    sunny: string;
+    cloudy: string;
+    rainy: string;
+  };
+}
+
+export const theme: ThemeI = {
   colors: {
     white: '#FFFFFF',
     lightGrey: '#F7F8FA',

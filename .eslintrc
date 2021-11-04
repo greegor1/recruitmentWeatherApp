@@ -7,7 +7,8 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "prettier/prettier": ["warn", { "singleQuote": true, "endOfLine":"auto", "printWidth": 150 }]
+        "prettier/prettier": ["warn", { "singleQuote": true, "endOfLine":"auto", "printWidth": 150 }],
+        "@typescript-eslint/explicit-module-boundary-types": 0
     },
     "env": {
         "browser": true,

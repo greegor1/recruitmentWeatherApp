@@ -8,7 +8,8 @@ export interface Location {
 }
 
 export interface Weather {
-  date: string;
+  id: string;
+  dayName: string;
   maxTemp: string;
   meanTemp: string;
   minTemp: string;
@@ -18,4 +19,7 @@ export interface Weather {
 export interface WeatherContextType {
   location: Location;
   weatherList: Weather[];
+  handleSearchForm: (newLocation: Location) => void;
+  handleClearFormState: (newLocation: Location) => void;
+  isLoading: boolean;
 }

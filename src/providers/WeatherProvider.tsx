@@ -1,6 +1,6 @@
-import { weatherDataMock } from 'mocks/weatherDataMock';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Location, Weather, WeatherContextType, WeatherProviderType } from 'types/Weather.types';
+import { apiCall } from 'utils/apiCall';
 
 export const WeatherContext = createContext<WeatherContextType>({
   location: {
@@ -8,22 +8,36 @@ export const WeatherContext = createContext<WeatherContextType>({
     city: '',
   },
   weatherList: [],
+  handleSearchForm: () => undefined,
+  handleClearFormState: () => undefined,
+  isLoading: false,
 });
-// list nie arr
+
+export const useWeatherContext = (): WeatherContextType => useContext(WeatherContext);
 
 const WeatherProvider: React.FunctionComponent<WeatherProviderType> = ({ children }) => {
   const [location, setLocation] = useState<Location>({ country: '', city: '' });
   const [weatherList, setWeatherList] = useState<Weather[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  //location zmienic na dane wyszukiwania np. searchLocationQuery
-  //debounce lodash do wpisywania w imputy
+  const fetchData = async () => {
+    const apiData = await apiCall(location, setIsLoading);
+    setWeatherList(apiData);
+  };
+
+  const handleSearchForm = (newLocation: Location) => setLocation(newLocation);
+
+  const handleClearFormState = (emptyLocation: Location) => setLocation(emptyLocation);
+
+  const context = { location, weatherList, handleSearchForm, handleClearFormState, isLoading };
 
   useEffect(() => {
-    setLocation({ country: 'PL', city: 'Wrocław' });
-    setWeatherList(weatherDataMock);
-  }, []);
+    if (location.city && location.country) {
+      fetchData();
+    }
+  }, [location]);
 
-  return <WeatherContext.Provider value={{ location, weatherList }}>{children}</WeatherContext.Provider>;
+  return <WeatherContext.Provider value={context}>{children}</WeatherContext.Provider>;
 };
 
 export default WeatherProvider;
