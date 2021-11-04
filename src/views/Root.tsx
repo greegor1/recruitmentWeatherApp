@@ -1,5 +1,6 @@
-import { GlobalStyle } from 'assets/styles/GlobalStyle';
+import { GlobalStyleContent } from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
+import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 import WeatherProvider from 'providers/WeatherProvider';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -8,11 +9,13 @@ import { Wrapper } from './Root.style';
 
 const Root = () => (
   <ThemeProvider {...{ theme }}>
-    <GlobalStyle />
+    <GlobalStyleContent />
     <WeatherProvider>
-      <Wrapper>
-        <Dashboard />
-      </Wrapper>
+      <MainTemplate>
+        <Wrapper>
+          <Dashboard />
+        </Wrapper>
+      </MainTemplate>
     </WeatherProvider>
   </ThemeProvider>
 );

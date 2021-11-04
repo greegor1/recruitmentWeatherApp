@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import DaysListItem from 'components/molecules/DaysListItem';
-import { WeatherContext } from 'providers/WeatherProvider';
+import React from 'react';
+import DaysListItem from 'components/molecules/DaysListItem/DaysListItem';
+import { useWeatherContext } from 'providers/WeatherProvider';
 import { StyledList } from './DaysList.style';
 import { Title } from 'components/atoms/Title/Title';
 
@@ -8,18 +8,27 @@ const DaysList = () => {
   const {
     location: { city, country },
     weatherList,
-  } = useContext(WeatherContext);
+    isLoading,
+  } = useWeatherContext();
+
+  if (!city && !country) return <Title>Fill search inputs</Title>;
+
+  if (isLoading) return <Title>Loading...</Title>;
 
   return (
     <>
       <Title>
-        Days list for {city}, {country}:
+        5 day weather for {city}, {country}:
       </Title>
-      <StyledList>
-        {weatherList.map(({ date, ...rest }) => (
-          <DaysListItem key={date} {...{ date, ...rest }} />
-        ))}
-      </StyledList>
+      {weatherList.length ? (
+        <StyledList>
+          {weatherList.map(({ id, ...rest }) => (
+            <DaysListItem key={id} {...{ ...rest }} />
+          ))}
+        </StyledList>
+      ) : (
+        <Title>No results for passed values</Title>
+      )}
     </>
   );
 };
